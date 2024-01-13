@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from 'react';
-import ReactDOM from 'react-dom/client';
 
 import Header from './Header.js';
 import Main from './Main.js';
@@ -51,6 +50,13 @@ function reducer(state, action) {
         status: 'finished',
         highscore:
           state.points > state.highscore ? state.points : state.highscore,
+      };
+    case 'restart':
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: 'ready',
+        highscore: state.highscore,
       };
 
     // index: state.index + 1,
@@ -123,6 +129,7 @@ function App() {
             points={points}
             maxPossiblePoints={maxPoints}
             highscore={highscore}
+            dispatch={dispatch}
           />
         )}
       </Main>
